@@ -28,7 +28,7 @@ function checkPort(port1, port2) {
 
 function checkPath(path1, path2) {
   const normalizePath = (path) => {
-    let stack = [];
+    const stack = [];
     path.split(/\//).forEach(dir => {
       if (dir === '' || dir === '.') return;
       if (dir === '..') {
@@ -66,21 +66,13 @@ function checkURIs(uri1, uri2) {
   const [match2, scheme2, auth2, host2, port2, path2, query2, fragment2] = uri2.match(URI_REGEX);
   const rules = [
     {func: checkScheme, params: [scheme1, scheme2]},
-    {func: checkAuth, params: [host1, host2]},
-    {func: checkHost, params: [auth1, auth2]},
+    {func: checkAuth, params: [auth1, auth2]},
+    {func: checkHost, params: [host1, host2]},
     {func: checkPort, params: [port1, port2]},
     {func: checkPath, params: [path1, path2]},
     {func: checkQuery, params: [query1, query2]},
   ];
-  return rules.every(rule => {
-    const eq = rule.func(...rule.params);
-    console.log(rule.func.name, eq);
-    return eq;
-  });
+  return rules.every(rule => rule.func(...rule.params));
 }
 
-var u1 = 'http://a:b@www.csdn.com/../a/b/c/.././d?a=1&b=1&b=2#f2';
-var u2 = 'a:b@www.csdn.com/a/b/d?b=1&a=1&b=2#f1';
-checkURIs(u1, u2);
-
-module.exports = {checkURIs}
+module.exports = checkURIs;
