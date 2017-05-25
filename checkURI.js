@@ -46,10 +46,9 @@ function checkPath(path1, path2) {
 
 function checkQuery(query1, query2) {
   const normalizeQuery = query => {
-    let queryItems = query.split(/[?&]/).filter(item => item !== '').sort((a, b) => {
+    return query.split(/[?&]/).filter(item => item !== '').sort((a, b) => {
       return a.split('=')[0] > b.split('=')[0] ? 1 : -1;
-    });
-    return queryItems.join('&');
+    }).join('&');
   }
   const q1 = normalizeQuery(query1);
   const q2 = normalizeQuery(query2);
