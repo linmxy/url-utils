@@ -1,7 +1,3 @@
-/**
- * Created by linmin on 24/5/17.
- */
-
 const URI_REGEX = /^(https?:\/\/|^)(\w+(?::\w+)?(?:@))?([^\/:?#]+)(:\d+)?([^?#]*|$)(\?[^#]+|$)(\#.*|$)/i;
 
 function checkURIs(uri1, uri2) {
@@ -44,6 +40,7 @@ function checkPort(port1, port2) {
 function checkPath(path1, path2) {
   const normalizePath = (path) => {
     const stack = [];
+    path = path || '';
     path.split(/\//).forEach(dir => {
       if (dir === '' || dir === '.') return;
       if (dir === '..') {
