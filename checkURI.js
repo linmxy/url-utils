@@ -63,8 +63,8 @@ function checkFragment(fragment1, fragment2) {
 }
 
 function checkURIs(uri1, uri2) {
-  const [url1, scheme1, auth1, host1, port1, path1, query1, fragment1] = uri1.match(URI_REGEX);
-  const [url2, scheme2, auth2, host2, port2, path2, query2, fragment2] = uri2.match(URI_REGEX);
+  const [match1, scheme1, auth1, host1, port1, path1, query1, fragment1] = uri1.match(URI_REGEX);
+  const [match2, scheme2, auth2, host2, port2, path2, query2, fragment2] = uri2.match(URI_REGEX);
   const rules = [
     {func: checkScheme, params: [scheme1, scheme2]},
     {func: checkAuth, params: [host1, host2]},
